@@ -4,9 +4,11 @@ import requests
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/requirements/')
 def requirements():
@@ -18,6 +20,7 @@ def requirements():
                 'requirements': data,
                 'query': request.values
             })
+
 
 @app.route('/generate-users/', methods=['GET', 'POST'])
 def generate_users():
@@ -48,6 +51,7 @@ def space():
             'number': number,
             'names': names_l
         })
+
 
 if __name__ == '__main__':
     app.run(
