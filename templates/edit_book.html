@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>book</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" action="/edit/book/{{book_values[0][0]}}/" >
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="id" id="id"
+                               value="{{book_values[0][0]}}"></p>
+                        <label for="name">Book title</label>
+                        <p><input required="required" type="text" class="form-control" name="name" id="name"
+                               value="{{book_values[0][1]}}"></p>
+                        <label for="author">Author Name</label>
+                            {% with author=get_by_id('author', book_values[0][3]) %}
+                            <p><input required="required" list="authors" class="form-control" name="author" id="author"
+                               value="{{author[1]}}")></p>
+                                <datalist id="authors">
+                                    {% for one_author in select_all('author') %}
+                                        <option>{{one_author[1]}}</option>
+                                    {% endfor %}
+                                </datalist>
+                            {% endwith %}
+                        <label for="genre">Genre</label>
+                            {% with genre=get_by_id('genre', book_values[0][2]) %}
+                            <p><input list="cocktail" class="form-control" name="genre" id="genre"
+                                   value={{genre[1]}}></p>
+                                <datalist id="cocktail">
+                                    {% for one_genre in select_all('genre') %}
+                                    <option>{{one_genre[1]}}</option>
+                                    {% endfor %}
+                                </datalist>
+                            {% endwith %}
+                        <label for="year">Year</label>
+                            {% with year=get_by_year('book', book_values[0][4]) %}
+                            <p><input type="number" class="form-control" name="year" id="year" value="{{year[4]}}"></p>
+                            {% endwith %}
+                    </div>
+                    <input type="hidden" value="edit_form" name="edit_form">
+                    <input style="width: 100%" class="btn btn-primary" type="submit" value="CONFIRM">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

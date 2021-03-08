@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Flask App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <form method="get" action="/create/book/">
+                                <input style="width: 100%" type="submit" value="ADD BOOK" class="btn btn-primary">
+                            </form>
+                        </td>
+                        <td>
+                            <form method="get" action="/create/janr/">
+                                <input style="width: 100%" type="submit" value="ADD GENRE" class="btn btn-primary">
+                            </form>
+                        </td>
+                        <td>
+                            <form method="get" action="/create/author/">
+                                <input style="width: 100%" type="submit" value="ADD AUTHOR" class="btn btn-primary">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Genre</th>
+                        <th>Year</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for book in books %}
+                    <tr>
+                        <th>{{book[1]}}</th>
+                        <th>
+                            {% with author=get_by_id('author', book[3]) %}
+                                <a href="/author/{{author[0]}}/">{{author[1]}}</a>
+                            {% endwith %}
+                        </th>
+                        <th>
+                            {% with genre=get_by_id('genre', book[2]) %}
+                                <a href="/genre/{{genre[0]}}/">{{genre[1]}}</a>
+                            {% endwith %}
+                        </th>
+                        <th>
+                            {% with year=get_by_year('book', book[4]) %}
+                                <a href="/year/{{book[4]}}/">{{book[4]}}</a>
+                            {% endwith %}
+                        </th>
+                        <th>
+                            <form method="post" action="/edit/book/{{book[0]}}/">
+                                <input type="hidden" value="{{book[0]}}" name="id">
+                                <input type="hidden" value="hidden_form" name="hidden_form">
+                                <input type="submit" value="  EDIT  " class="btn btn-warning">
+                            </form>
+                        </th>
+                        <th>
+                            <form method="post" onSubmit='return confirm("Для удаления всей информации нажмите OK?");'
+                                  action="/remove_book/">
+                                <input type="hidden" value="{{book[0]}}" name="id">
+                                <input type="submit" value="DELETE" class="btn btn-danger">
+                            </form>
+                        </th>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
