@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 
 def execute_query(query):
-    with sqlite3.connect('books.db') as conn:
+    with sqlite3.connect('home_work_3/books.db') as conn:
         cursor = conn.cursor()
         cursor.execute(query)
         conn.commit()
