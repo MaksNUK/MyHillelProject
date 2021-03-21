@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="logo">Users</h1>
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Index</a></li>
+            <li><a href="{{ url_for('generate_users') }}">Users</a></li>
+            <li><a href="{{ url_for('space') }}">Space</a></li>
+            <li><a href="{{ url_for('requirements') }}">Requirements</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
+    <h4>Enter the number of users or add query parameter in url "?count_users="</h4>
+    <form id="data" method="POST"></form>
+    <p><input type="number" name="count" form="data"></p>
+    <p><input type="submit" method="POST" value="send count" form="data"></p>
+  <ol>
+    {% for key, value in users.items() %}
+      <li class="list-group-items">{{key}} {{value}}</li>
+    {% endfor %}
+  </ol>
+  </body>
+</html>
