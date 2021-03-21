@@ -12,7 +12,7 @@ def index():
 
 @app.route('/requirements/')
 def requirements():
-    with open('../requirements.txt') as rq:
+    with open('requirements.txt') as rq:
         data = rq.readlines()
         data = [x for x in data]
         return render_template(
