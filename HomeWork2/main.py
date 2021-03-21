@@ -12,7 +12,7 @@ def index():
 
 @app.route('/requirements/')
 def requirements():
-    with open('requirements.txt') as rq:
+    with open('../requirements.txt') as rq:
         data = rq.readlines()
         data = [x for x in data]
         return render_template(
@@ -57,5 +57,5 @@ if __name__ == '__main__':
     app.run(
         host='127.0.0.1',
         port=5555,
-        debug=False
+        debug=True
     )
