@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homework 2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1 class="logo">Space</h1>
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Index</a></li>
+            <li><a href="{{ url_for('generate_users') }}">Users</a></li>
+            <li><a href="{{ url_for('space') }}">Space</a></li>
+            <li><a href="{{ url_for('requirements') }}">Requirements</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
+  <h3>The number of astronauts at the moment is {{number}} people</h3>
+  <h3>it's:</h3>
+  <menu>
+    {% for name in names %}
+      <li class="list-group-items">{{name}}</li>
+    {% endfor %}
+  </menu>
+  </body>
+</html>
